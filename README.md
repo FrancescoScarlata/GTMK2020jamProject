@@ -1,4 +1,4 @@
-# README #
+# README # 
 
 ### What is this repository for? ###
 
@@ -18,7 +18,8 @@ The game will be made with Unity, version 2019.3.15f1
 ### How do I get set up? ###
 
 #### Summary of set up
-
+install Unity hub
+install the Unity version 2019.3.15f1
 
 #### Other guidelines
 

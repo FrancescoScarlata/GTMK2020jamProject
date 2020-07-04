@@ -17,14 +17,15 @@ public class TestSoundEffectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("Fire1")>0)
+        if (Input.GetButtonDown("Fire1"))
         {
             if (source.isPlaying)
             {
                 source.Stop();
-                source.clip = clip;
-                source.Play();
+               
             }
+            source.clip = clip;
+            source.Play();
         }
     }
 }

@@ -185,14 +185,17 @@ public class CharacterController : MonoBehaviour,IDamageble
     {
         while (isAlive && currWeaponIndex>=0)
         {
-            if (recoilEffectCoroutine != null)
-                StopCoroutine(recoilEffectCoroutine);
-            recoilEffectCoroutine= StartCoroutine( weapons[currWeaponIndex].RecoilEffect(this) );
-            weapons[currWeaponIndex].currMagazineIndex++;
-            InGameUIManager.instance.UpdateMagazineInfo(weapons[currWeaponIndex].currMagazineIndex, weapons[currWeaponIndex].capacityMagazine);
-            // shoot audio
+            if (weapons[currWeaponIndex].currMagazineIndex < weapons[currWeaponIndex].capacityMagazine)
+            {
+                if (recoilEffectCoroutine != null)
+                    StopCoroutine(recoilEffectCoroutine);
+                recoilEffectCoroutine = StartCoroutine(weapons[currWeaponIndex].RecoilEffect(this));
+                weapons[currWeaponIndex].currMagazineIndex++;
+                InGameUIManager.instance.UpdateMagazineInfo(weapons[currWeaponIndex].currMagazineIndex, weapons[currWeaponIndex].capacityMagazine);
+                // shoot audio
 
-            yield return waitAttackSpeed;
+                yield return waitAttackSpeed;
+            }
             if (currWeaponIndex >=0 && weapons[currWeaponIndex].currMagazineIndex >= weapons[currWeaponIndex].capacityMagazine)
             {
                 isReloading = true;

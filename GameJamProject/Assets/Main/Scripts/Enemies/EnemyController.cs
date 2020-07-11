@@ -53,7 +53,7 @@ public class EnemyController : MonoBehaviour,IDamageble
 
     public void Die()
     {
-        Debug.Log("Im dead!");
+        Debug.Log("Enemy dead!");
         if (deathCLip)
             SoundEffectManager.instance.PlaySFX(deathCLip);
         Destroy(gameObject);

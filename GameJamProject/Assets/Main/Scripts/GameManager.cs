@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager instance;
-    public float distanceForEnemyFightMusic=10;
+    public float distanceForEnemyFightMusic=20;
     public int currentLevel;
     public SoundtrackManager soundTrackMan;
 
@@ -49,12 +49,13 @@ public class GameManager : MonoBehaviour
                             break;
                         }
                 }
+
                 if (!isEnemyInside && !isMusicTense)
                 {
                     soundTrackMan.OutOfFight();
                     isMusicTense = true;
                 }
-                    
+
             }
            
             yield return waitMusic;

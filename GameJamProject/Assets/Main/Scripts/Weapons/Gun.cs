@@ -20,10 +20,12 @@ public class Gun : _Weapon
         instancedProj = myProjectile.GetComponent<Projectile>();
         instancedProj.SetProjInfos(controller.transform.up,projSpeed,damage);
 
+        // shoot particles
         yield return new WaitForSeconds(timePreShoot);
-        controller.rigidBody2D.AddForce(-controller.transform.up * distanceRecoil);
+        controller.rigidBody2D.AddForce(-controller.transform.up * distanceRecoil, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(timeForRecoilAfterShooting);
+        controller.rigidBody2D.velocity = Vector2.zero;
         controller.SetIsDoindRecoil(false);
     }
 

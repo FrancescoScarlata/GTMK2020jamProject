@@ -13,11 +13,13 @@ public class _Weapon : ScriptableObject
     public float range;
     public float moVspeed;
     public AudioClip attackClip;
+    public AudioClip changeWeaponClip;
     public float attackSpeed;
     public int capacityMagazine;
     public float reloadTime;
     public AudioClip reloadClip;
     public GameObject projectilePrefab;
+    public int currMagazineIndex = 0;
 
     public float distanceRecoil;
     public float durationRecoil;

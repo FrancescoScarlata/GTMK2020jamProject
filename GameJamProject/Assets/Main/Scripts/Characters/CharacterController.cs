@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class CharacterController : MonoBehaviour,IDamageble
 {
+    public static CharacterController instance;
+
 
     [Header("Characteristics")]
     public float HPs;
@@ -17,14 +19,16 @@ public class CharacterController : MonoBehaviour,IDamageble
     public Rigidbody2D rigidBody2D;
     public _Weapon[] weapons;
     public bool isReloading=false;
+    public bool isKnocked = false;
     [Space(10)]
 
     public Transform gunSpawnProjectile;
-
+    public Transform shotgunSpawnProjectile;
+    public Transform rocketSpawnProjectile;
 
 
     public int currWeaponIndex=-1;
-    protected bool isKnocked=false;
+
     float recoilVector;
 
     int currIndexInMagazine;
@@ -40,6 +44,16 @@ public class CharacterController : MonoBehaviour,IDamageble
     {
         ChangeWeapon(currWeaponIndex);
         shootCoroutine=StartCoroutine(Shoot());
+    }
+
+    private void Awake() // singleton
+    {
+        if (instance)
+            Destroy(this.gameObject);
+        else
+        {
+            instance = this;
+        }
     }
 
     void Update()
@@ -60,6 +74,14 @@ public class CharacterController : MonoBehaviour,IDamageble
             if (Input.GetButtonDown("GunWeapon"))
             {
                 ChangeWeapon((int)WeaponType.gun);
+            }
+            if (Input.GetButtonDown("ShotgunWeapon"))
+            {
+                ChangeWeapon((int)WeaponType.shotgun);
+            }
+            if (Input.GetButtonDown("RocketWeapon"))
+            {
+                ChangeWeapon((int)WeaponType.rocketLauncher);
             }
         }
        
@@ -104,6 +126,7 @@ public class CharacterController : MonoBehaviour,IDamageble
             {
                 waitAttackSpeed = new WaitForSeconds(weapons[weaponType].attackSpeed);
                 waitReloadTime = new WaitForSeconds(weapons[weaponType].reloadTime);
+                movSpeed = weapons[weaponType].moVspeed;
             }
             if (shootCoroutine != null)
                 StopCoroutine(shootCoroutine);
@@ -118,19 +141,18 @@ public class CharacterController : MonoBehaviour,IDamageble
     /// <returns></returns>
     IEnumerator Shoot()
     {
-        
         while (isAlive && currWeaponIndex>=0)
         {
             recoilVector = weapons[currWeaponIndex].distanceRecoil;
              StartCoroutine( weapons[currWeaponIndex].RecoilEffect(this) );
-            currIndexInMagazine++;
+            weapons[currWeaponIndex].currMagazineIndex++;
             // shoot animation
             // shoot audio
             yield return waitAttackSpeed;
-            if (currWeaponIndex >=0 && currIndexInMagazine >= weapons[currWeaponIndex].capacityMagazine)
+            if (currWeaponIndex >=0 && weapons[currWeaponIndex].currMagazineIndex >= weapons[currWeaponIndex].capacityMagazine)
             {
                 isReloading = true;
-                currIndexInMagazine = 0;
+                weapons[currWeaponIndex].currMagazineIndex = 0;
                 yield return waitReloadTime;
                 isReloading = false;
             }

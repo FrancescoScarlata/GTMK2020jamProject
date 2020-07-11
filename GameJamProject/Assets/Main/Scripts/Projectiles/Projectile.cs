@@ -15,6 +15,8 @@ public class Projectile : MonoBehaviour
     protected Vector2 direction;
     protected float damage;
     protected Vector2 startingPosition;
+    protected float timeOfSpawn;
+    //protected 
 
     void Start()
     {
@@ -24,8 +26,15 @@ public class Projectile : MonoBehaviour
     void OnEnable()
     {
         startingPosition = transform.position;
+        timeOfSpawn = Time.time;
     }
 
+    private void Update()
+    {
+        if (timeOfSpawn + 10 < Time.time)
+            Impact();
+
+    }
 
     public void SetProjInfos(Vector2 dir,float projSpeed,float dmg)
     {
@@ -53,10 +62,8 @@ public class Projectile : MonoBehaviour
     protected void Impact()
     {
         gameObject.SetActive(false);
-        //ObjectPooler.instance.PlaceInPool(tagForSpawn, gameObject);
+        ObjectPooler.instance.PlaceInPool(tagForSpawn, gameObject);
 
-       // if (projImpactSFX)
-       //     SoundEffectManager.instance.PlaySFX(projImpactSFX);
     }
 
 }

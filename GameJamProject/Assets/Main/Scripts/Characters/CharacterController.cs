@@ -85,10 +85,10 @@ public class CharacterController : MonoBehaviour,IDamageble
             {
                 ChangeWeapon((int)WeaponType.shotgun);
             }
-            if (Input.GetButtonDown("RocketWeapon"))
+            /*if (Input.GetButtonDown("RocketWeapon"))
             {
                 ChangeWeapon((int)WeaponType.rocketLauncher);
-            }
+            }*/
             if (Input.GetButtonDown("BerserkWeapon"))
             {
                 ChangeWeapon((int)WeaponType.berserkSword);

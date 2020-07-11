@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager instance;
+    public float distanceForEnemyFightMusic=10;
     public int currentLevel;
     public SoundtrackManager soundTrackMan;
 
@@ -28,12 +29,6 @@ public class GameManager : MonoBehaviour
             Destroy(this);
     }
 
-    public void Update()
-    {
-        
-    }
-
-
     IEnumerator CheckforEnemies()
     {
         bool isEnemyInside;
@@ -42,7 +37,7 @@ public class GameManager : MonoBehaviour
             isEnemyInside = false;
             if (CharacterController.instance != null)
             {
-                colliders = Physics2D.OverlapCircleAll(CharacterController.instance.transform.position, 10);
+                colliders = Physics2D.OverlapCircleAll(CharacterController.instance.transform.position, distanceForEnemyFightMusic);
                 foreach (Collider2D coll in colliders)
                 {
                     if (coll.GetComponent<EnemyController>() != null)
@@ -55,7 +50,11 @@ public class GameManager : MonoBehaviour
                         }
                 }
                 if (!isEnemyInside && !isMusicTense)
+                {
                     soundTrackMan.OutOfFight();
+                    isMusicTense = true;
+                }
+                    
             }
            
             yield return waitMusic;

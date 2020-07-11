@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// This is a script for the Raw Image that contains the playerVideo
@@ -11,6 +12,7 @@ using UnityEngine.UI;
 public class PlayVideoScript : MonoBehaviour {
 
     public VideoPlayer videoP;
+    public VideoClip cutscene;
     private RawImage image;
 
     //To not let to skip when the video is not even on
@@ -24,7 +26,9 @@ public class PlayVideoScript : MonoBehaviour {
         videoP=GetComponent<VideoPlayer>();
         image=GetComponent<RawImage>();
         audioSource = GetComponent<AudioSource>();
-        
+
+        // only for this case
+        StartVideo(cutscene);
 	}
 
     /// <summary>
@@ -111,7 +115,7 @@ public class PlayVideoScript : MonoBehaviour {
     /// </summary>
     protected virtual void ModificationsPostVideoPlay()
     {
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 }

@@ -12,12 +12,15 @@ public class SoundtrackManager : MonoBehaviour
 
     private void Start()
     {
+
         audioSourceFight.volume = 0;
         audioSourceTense.volume = activeVolume;
     }
 
     public void Fight()
     {
+        audioSourceFight.Stop();
+        audioSourceFight.Play();
         audioSourceFight.volume =activeVolume;
         audioSourceTense.volume = 0;
     }
@@ -26,6 +29,9 @@ public class SoundtrackManager : MonoBehaviour
     public void OutOfFight()
     {
         audioSourceFight.volume = 0;
+
+        audioSourceTense.Stop();
+        audioSourceTense.Play();
         audioSourceTense.volume = activeVolume;
     }
 

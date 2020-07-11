@@ -28,6 +28,7 @@ public class Rocket : _Weapon
         controller.rigidBody2D.velocity = Vector2.zero;
         // animation knocked
         yield return new WaitForSeconds(timeForRecoilAfterShooting);
+        controller.isKnocked = false;
         // animation back up
         //controller.rigidBody2D.velocity = Vector2.zero;
         controller.SetIsDoindRecoil(false);

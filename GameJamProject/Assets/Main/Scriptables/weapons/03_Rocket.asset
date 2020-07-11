@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db044333499ebe04ea7f5b8cac3a5e5c, type: 3}
+  m_Name: 03_Rocket
+  m_EditorClassIdentifier: 
+  damage: 10
+  range: 0
+  moVspeed: 1
+  attackClip: {fileID: 0}
+  changeWeaponClip: {fileID: 0}
+  attackSpeed: 3
+  capacityMagazine: 1
+  reloadTime: 2
+  reloadClip: {fileID: 0}
+  projectilePrefab: {fileID: 483375651263044311, guid: 0002caf9a7d80904fadbffadfefe246f,
+    type: 3}
+  currMagazineIndex: 1
+  distanceRecoil: 2
+  durationRecoil: 2
+  projSpeed: 2
+  timePreShoot: 0.2
+  timeForRecoilAfterShooting: 1.5

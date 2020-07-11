@@ -36,11 +36,14 @@ public class Projectile : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D (Collider2D collider)
     {
-        IDamageble enemy = collision.transform.GetComponent<IDamageble>();
+        IDamageble enemy = collider.transform.GetComponent<IDamageble>();
         if (enemy!=null)
             enemy.GetDamage(damage);
+        Debug.Log($"Collision: {collider.transform.name}");
+        if(collider.transform.tag!= transform.tag)
+            Impact();
     }
 
 
@@ -50,7 +53,7 @@ public class Projectile : MonoBehaviour
     protected void Impact()
     {
         gameObject.SetActive(false);
-        ObjectPooler.instance.PlaceInPool(tagForSpawn, gameObject);
+        //ObjectPooler.instance.PlaceInPool(tagForSpawn, gameObject);
 
        // if (projImpactSFX)
        //     SoundEffectManager.instance.PlaySFX(projImpactSFX);

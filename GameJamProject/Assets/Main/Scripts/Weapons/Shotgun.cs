@@ -47,7 +47,6 @@ public class Shotgun : _Weapon
 
                 myProjectile = GameObject.Instantiate(projectilePrefab, controller.shotgunSpawnProjectile.position, Quaternion.identity);
                 instancedProj = myProjectile.GetComponent<Projectile>();
-
                 if (playerDir.x * playerDir.y <= 0)
                 {
                     playerDir = new Vector2(playerDir.x - (spreadAngle / (360f * i)), playerDir.y - (spreadAngle / (360f * i)));
@@ -56,17 +55,10 @@ public class Shotgun : _Weapon
                 {
                     playerDir = new Vector2(playerDir.x - (spreadAngle / (360f * i)), playerDir.y - (spreadAngle / (360f * i)));
                 }
-
                 instancedProj.SetProjInfos(playerDir, projSpeed, damage);
             }
         }
             // here i have to make the different range of direction
-
-            myProjectile = GameObject.Instantiate(projectilePrefab, controller.gunSpawnProjectile.position, Quaternion.identity);
-            instancedProj = myProjectile.GetComponent<Projectile>();
-            instancedProj.SetProjInfos(controller.transform.up, projSpeed, damage);
-
-
         // shoot particles
 
         yield return new WaitForSeconds(timePreShoot);

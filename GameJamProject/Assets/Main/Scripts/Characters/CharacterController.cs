@@ -17,6 +17,7 @@ public class CharacterController : MonoBehaviour,IDamageble
     public float movSpeed=2;
     public Animator anim;
     public Rigidbody2D rigidBody2D;
+    public LayerMask IgnoreMe;
     public _Weapon[] weapons;
     public bool isReloading=false;
     public bool isKnocked = false;
@@ -28,17 +29,17 @@ public class CharacterController : MonoBehaviour,IDamageble
 
 
     public int currWeaponIndex=-1;
-
-    float recoilVector;
-
-    int currIndexInMagazine;
     protected bool isAlive=true;
     protected bool isDoingSomeSpecialRecoil;
 
     protected Coroutine shootCoroutine;
+    protected Coroutine recoilEffectCoroutine;
     protected WaitForSeconds waitAttackSpeed;
     protected WaitForSeconds waitReloadTime;
-    
+    protected RaycastHit2D hitFront;
+    protected RaycastHit2D hitLeft;
+    protected RaycastHit2D hitRight;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -92,7 +93,31 @@ public class CharacterController : MonoBehaviour,IDamageble
         {
             // check the shoot -> the recoil effects is in the shoot
             //character goes everytime in front of him
-            rigidBody2D.velocity = (transform.up * movSpeed);
+            hitFront = Physics2D.Raycast(transform.position, transform.up, 1.5f, IgnoreMe);
+            hitLeft = Physics2D.Raycast(transform.position, -transform.right, 0.55f, IgnoreMe);
+            hitRight = Physics2D.Raycast(transform.position, transform.right, 0.55f, IgnoreMe);
+
+            Debug.DrawRay(transform.position, transform.up, Color.red, .5f);
+            Debug.DrawRay(transform.position, -transform.right, Color.yellow, .5f);
+            Debug.DrawRay(transform.position, transform.right, Color.green, .5f);
+            if (hitFront.collider==null && hitLeft.collider == null && hitRight.collider == null)
+            {
+                rigidBody2D.velocity = (transform.up * movSpeed);
+            }
+            else
+            {
+                if(hitFront.collider)
+                    Debug.Log($"hit point front is:{hitFront.collider.name} ");
+                if (hitLeft.collider)
+                    Debug.Log($"hit point right is:{hitLeft.collider.name} ");
+                if (hitRight.collider)
+                    Debug.Log($"hit point left is:{hitRight.collider.name} ");
+
+                rigidBody2D.velocity = Vector2.zero;
+
+            }
+                
+
         }
     }
 
@@ -128,6 +153,10 @@ public class CharacterController : MonoBehaviour,IDamageble
                 waitReloadTime = new WaitForSeconds(weapons[weaponType].reloadTime);
                 movSpeed = weapons[weaponType].moVspeed;
             }
+            else
+            {
+                movSpeed = 4;
+            }
             if (shootCoroutine != null)
                 StopCoroutine(shootCoroutine);
             shootCoroutine=StartCoroutine(Shoot());
@@ -143,8 +172,9 @@ public class CharacterController : MonoBehaviour,IDamageble
     {
         while (isAlive && currWeaponIndex>=0)
         {
-            recoilVector = weapons[currWeaponIndex].distanceRecoil;
-             StartCoroutine( weapons[currWeaponIndex].RecoilEffect(this) );
+            if (recoilEffectCoroutine != null)
+                StopCoroutine(recoilEffectCoroutine);
+            recoilEffectCoroutine= StartCoroutine( weapons[currWeaponIndex].RecoilEffect(this) );
             weapons[currWeaponIndex].currMagazineIndex++;
             // shoot animation
             // shoot audio

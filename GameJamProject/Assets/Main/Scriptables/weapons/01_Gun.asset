@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea980fd11a4c7644eb1b871cdea63cb3, type: 3}
+  m_Name: 01_Gun
+  m_EditorClassIdentifier: 
+  damage: 1
+  range: 8
+  moVspeed: 3
+  attackClip: {fileID: 0}
+  changeWeaponClip: {fileID: 0}
+  attackSpeed: 0.5
+  capacityMagazine: 12
+  reloadTime: 2
+  reloadClip: {fileID: 0}
+  projectilePrefab: {fileID: 2440432329808001276, guid: 563e6743d2f2bb94393268ac5b983a95,
+    type: 3}
+  currMagazineIndex: 11
+  distanceRecoil: 0.2
+  durationRecoil: 0.1
+  projSpeed: 5
+  timePreShoot: 0.1
+  timeForRecoilAfterShooting: 0.1

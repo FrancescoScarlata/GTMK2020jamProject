@@ -37,6 +37,5 @@ public enum WeaponType // will have also the same order in the array
     gun,
     shotgun,
     rocketLauncher,
-    fireThrower,
-    BerserkSword
+    berserkSword
 }

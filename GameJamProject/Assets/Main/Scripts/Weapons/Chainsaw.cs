@@ -23,14 +23,14 @@ public class Chainsaw : _Weapon
         // get z axe of the player
         charRot = controller.transform.rotation.eulerAngles.z;
         
-        /*timeToRotate = 0;
+        timeToRotate = 0;
         
         while (timeToRotate <= 1)
         {
             controller.transform.rotation = Quaternion.Euler(0, 0, Mathf.LerpAngle(charRot, charRot + degreeRotation, timeToRotate));
             timeToRotate += Time.deltaTime / timeForRotation;
             yield return null;
-        }*/
+        }
         
         controller.transform.rotation = Quaternion.Euler(0, 0, charRot + degreeRotation);
         controller.SetIsDoindRecoil(false);

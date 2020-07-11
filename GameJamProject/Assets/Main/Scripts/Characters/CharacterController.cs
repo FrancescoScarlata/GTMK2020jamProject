@@ -17,7 +17,7 @@ public class CharacterController : MonoBehaviour,IDamageble
     public float movSpeed=2;
     public Animator anim;
     public Rigidbody2D rigidBody2D;
-    public LayerMask IgnoreMe;
+    public LayerMask NotIgnoredLayers;
     public _Weapon[] weapons;
     public bool isReloading=false;
     public bool isKnocked = false;
@@ -84,18 +84,21 @@ public class CharacterController : MonoBehaviour,IDamageble
             {
                 ChangeWeapon((int)WeaponType.rocketLauncher);
             }
+            if (Input.GetButtonDown("BerserkWeapon"))
+            {
+                ChangeWeapon((int)WeaponType.berserkSword);
+            }
+
         }
-       
+            #endregion
 
-        #endregion
-
-        if (!isDoingSomeSpecialRecoil)
+         if (!isDoingSomeSpecialRecoil)
         {
             // check the shoot -> the recoil effects is in the shoot
             //character goes everytime in front of him
-            hitFront = Physics2D.Raycast(transform.position, transform.up, 1.5f, IgnoreMe);
-            hitLeft = Physics2D.Raycast(transform.position, -transform.right, 0.55f, IgnoreMe);
-            hitRight = Physics2D.Raycast(transform.position, transform.right, 0.55f, IgnoreMe);
+            hitFront = Physics2D.Raycast(transform.position, transform.up, 1.5f, NotIgnoredLayers);
+            hitLeft = Physics2D.Raycast(transform.position, -transform.right, 0.55f, NotIgnoredLayers);
+            hitRight = Physics2D.Raycast(transform.position, transform.right, 0.55f, NotIgnoredLayers);
 
             Debug.DrawRay(transform.position, transform.up, Color.red, .5f);
             Debug.DrawRay(transform.position, -transform.right, Color.yellow, .5f);
@@ -114,7 +117,6 @@ public class CharacterController : MonoBehaviour,IDamageble
                     Debug.Log($"hit point left is:{hitRight.collider.name} ");
 
                 rigidBody2D.velocity = Vector2.zero;
-
             }
                 
 

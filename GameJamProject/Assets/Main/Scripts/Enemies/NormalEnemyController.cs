@@ -16,15 +16,15 @@ public class NormalEnemyController : EnemyController
     public override void DoSomething()
     {
         base.DoSomething();
+        dir = controller.transform.position - transform.position;
+        dir = dir.normalized;
+        transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90);
         if (!isGoingBack)
         {
 
-            dir = CharacterController.instance.transform.position - transform.position;
+            dir = controller.transform.position - transform.position;
             if (dir.magnitude > attackRange)
             {
-                dir = dir.normalized;
-                Debug.DrawRay(transform.position, dir);
-                transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90);
                 rgbd2D.velocity = transform.up * myInfo.movSpeed;
             }
             else

@@ -17,14 +17,17 @@ public class Rocket : _Weapon
         controller.SetIsDoindRecoil(true);
         controller.rigidBody2D.velocity = Vector2.zero;
 
-        myProjectile = GameObject.Instantiate(projectilePrefab, controller.rocketSpawnProjectile.position, Quaternion.identity);
+        yield return new WaitForSeconds(timePreShoot);
+        myProjectile = ObjectPooler.instance.SpawnFromPool(projectilePrefab.GetComponent<Projectile>().tagForSpawn, controller.rocketSpawnProjectile.position, Quaternion.identity);
         instancedProj = myProjectile.GetComponent<Projectile>();
+        myProjectile.SetActive(true);
         instancedProj.SetProjInfos(controller.transform.up, projSpeed, damage);
 
-        yield return new WaitForSeconds(timePreShoot);
+        
         controller.rigidBody2D.AddForce(-controller.transform.up * distanceRecoil, ForceMode2D.Impulse);
-
+        CameraShake.instance.ExecuteShake();
         controller.isKnocked = true;
+        controller.anim.SetTrigger("Knocked");
         controller.rigidBody2D.velocity = Vector2.zero;
         // animation knocked
         yield return new WaitForSeconds(timeForRecoilAfterShooting);

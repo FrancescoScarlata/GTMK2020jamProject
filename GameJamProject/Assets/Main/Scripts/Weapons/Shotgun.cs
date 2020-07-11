@@ -21,18 +21,21 @@ public class Shotgun : _Weapon
         controller.SetIsDoindRecoil(true);
         controller.rigidBody2D.velocity = Vector2.zero;
         // has to shoot 4 projectiles
-
-        for(int i=0; i< (int)(numOfProjectiles/2)+1; i++)
+        SoundEffectManager.instance.PlaySFX(attackClip);
+        for (int i=0; i< (int)(numOfProjectiles/2)+1; i++)
         {
             if (i == 0)
             {
-                myProjectile = GameObject.Instantiate(projectilePrefab, controller.shotgunSpawnProjectile.position, Quaternion.identity);
+                myProjectile = ObjectPooler.instance.SpawnFromPool(projectilePrefab.GetComponent<Projectile>().tagForSpawn,
+                    controller.shotgunSpawnProjectile.position,Quaternion.identity);
                 instancedProj = myProjectile.GetComponent<Projectile>();
+                myProjectile.SetActive(true);
                 instancedProj.SetProjInfos(controller.transform.up, projSpeed, damage);
             }
             else
             {
-                myProjectile = GameObject.Instantiate(projectilePrefab, controller.shotgunSpawnProjectile.position, Quaternion.identity);
+                myProjectile = ObjectPooler.instance.SpawnFromPool(projectilePrefab.GetComponent<Projectile>().tagForSpawn,
+                    controller.shotgunSpawnProjectile.position, Quaternion.identity);
                 instancedProj = myProjectile.GetComponent<Projectile>();
                 playerDir = controller.transform.up;
                 if (playerDir.x * playerDir.y <= 0)
@@ -43,9 +46,11 @@ public class Shotgun : _Weapon
                 {
                     playerDir = new Vector2(playerDir.x + (spreadAngle / (360f * i)), playerDir.y - (spreadAngle / (360f * i)));
                 }
+                myProjectile.SetActive(true);
                 instancedProj.SetProjInfos(playerDir, projSpeed, damage);
 
-                myProjectile = GameObject.Instantiate(projectilePrefab, controller.shotgunSpawnProjectile.position, Quaternion.identity);
+                myProjectile = ObjectPooler.instance.SpawnFromPool(projectilePrefab.GetComponent<Projectile>().tagForSpawn,
+                    controller.shotgunSpawnProjectile.position, Quaternion.identity);
                 instancedProj = myProjectile.GetComponent<Projectile>();
                 if (playerDir.x * playerDir.y <= 0)
                 {
@@ -55,6 +60,7 @@ public class Shotgun : _Weapon
                 {
                     playerDir = new Vector2(playerDir.x - (spreadAngle / (360f * i)), playerDir.y - (spreadAngle / (360f * i)));
                 }
+                myProjectile.SetActive(true);
                 instancedProj.SetProjInfos(playerDir, projSpeed, damage);
             }
         }
@@ -63,7 +69,7 @@ public class Shotgun : _Weapon
 
         yield return new WaitForSeconds(timePreShoot);
         controller.rigidBody2D.AddForce(-controller.transform.up * distanceRecoil,ForceMode2D.Impulse);
-
+        CameraShake.instance.ExecuteShake();
         yield return new WaitForSeconds(timeForRecoilAfterShooting);
         controller.rigidBody2D.velocity = Vector2.zero;
         controller.SetIsDoindRecoil(false);

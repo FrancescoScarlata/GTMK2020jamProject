@@ -6,6 +6,7 @@ public class EnemyController : MonoBehaviour,IDamageble
 {
     public EnemyInfos myInfo;
     public Rigidbody2D rgbd2D;
+    public AudioClip deathCLip;
 
     protected Vector2 dir;
     protected float myHP;
@@ -53,6 +54,8 @@ public class EnemyController : MonoBehaviour,IDamageble
     public void Die()
     {
         Debug.Log("Im dead!");
+        if (deathCLip)
+            SoundEffectManager.instance.PlaySFX(deathCLip);
         Destroy(gameObject);
     }
 

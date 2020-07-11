@@ -5,7 +5,9 @@ using UnityEngine;
 public class NormalEnemyController : EnemyController
 {
     public float attackRange=1f;
+    public AudioClip attackClip;
     protected bool isGoingBack = false;
+    
 
     protected override void Start()
     {
@@ -41,9 +43,9 @@ public class NormalEnemyController : EnemyController
         {
             Debug.Log("Collision in Enemy!");
             StartCoroutine(WaitInTrigger());
+            SoundEffectManager.instance.PlaySFX(attackClip);
             CharacterController.instance.GetDamage(myInfo.damage);
             rgbd2D.AddForce(-transform.up * myInfo.movSpeed * 2, ForceMode2D.Impulse);
-            
         }
            
     }

@@ -24,6 +24,10 @@ public class _Weapon : ScriptableObject
     public float distanceRecoil;
     public float durationRecoil;
 
+    private void Awake()
+    {
+        currMagazineIndex = 0;
+    }
 
     public virtual IEnumerator RecoilEffect(CharacterController controller)
     {

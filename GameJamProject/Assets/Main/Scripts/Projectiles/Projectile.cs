@@ -39,7 +39,7 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter2D (Collider2D collider)
     {
         IDamageble enemy = collider.transform.GetComponent<IDamageble>();
-        if (enemy!=null)
+        if (enemy!=null && collider.transform.tag!="Player")
             enemy.GetDamage(damage);
         Debug.Log($"Collision: {collider.transform.name}");
         if(collider.transform.tag!= transform.tag)

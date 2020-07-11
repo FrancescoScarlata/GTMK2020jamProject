@@ -16,14 +16,15 @@ public class Gun : _Weapon
         controller.SetIsDoindRecoil(true);
         controller.rigidBody2D.velocity = Vector2.zero;
 
-        myProjectile= GameObject.Instantiate(projectilePrefab,controller.gunSpawnProjectile.position,Quaternion.identity);
+        myProjectile= ObjectPooler.instance.SpawnFromPool(projectilePrefab.GetComponent<Projectile>().tagForSpawn,controller.gunSpawnProjectile.position,Quaternion.identity);
         instancedProj = myProjectile.GetComponent<Projectile>();
+        myProjectile.SetActive(true);
         instancedProj.SetProjInfos(controller.transform.up,projSpeed,damage);
-
+        SoundEffectManager.instance.PlaySFX(attackClip);
         // shoot particles
         yield return new WaitForSeconds(timePreShoot);
         controller.rigidBody2D.AddForce(-controller.transform.up * distanceRecoil, ForceMode2D.Impulse);
-
+        CameraShake.instance.ExecuteShake();
         yield return new WaitForSeconds(timeForRecoilAfterShooting);
         controller.rigidBody2D.velocity = Vector2.zero;
         controller.SetIsDoindRecoil(false);

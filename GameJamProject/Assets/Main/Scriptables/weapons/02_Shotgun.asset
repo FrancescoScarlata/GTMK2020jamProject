@@ -15,19 +15,19 @@ MonoBehaviour:
   damage: 0.5
   range: 5
   moVspeed: 2.5
-  attackClip: {fileID: 0}
+  attackClip: {fileID: 8300000, guid: ce9f1f5eb37171647bb0b8ea2347a134, type: 3}
   changeWeaponClip: {fileID: 0}
   attackSpeed: 1
   capacityMagazine: 4
   reloadTime: 2
-  reloadClip: {fileID: 0}
+  reloadClip: {fileID: 8300000, guid: 23fd74e91c3e12642a158809bec44949, type: 3}
   projectilePrefab: {fileID: 2843710340944956230, guid: 6f088745dc303ac45a6af4492dd015b1,
     type: 3}
-  currMagazineIndex: 1
+  currMagazineIndex: 0
   distanceRecoil: 5
   durationRecoil: 0.1
   projSpeed: 5
   numOfProjectiles: 4
-  spreadAngle: 45
+  spreadAngle: 90
   timePreShoot: 0.1
   timeForRecoilAfterShooting: 0.2

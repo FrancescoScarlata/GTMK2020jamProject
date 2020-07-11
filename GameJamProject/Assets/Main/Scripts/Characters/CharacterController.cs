@@ -11,6 +11,7 @@ public class CharacterController : MonoBehaviour,IDamageble
 
     [Header("Characteristics")]
     public float HPs;
+    public float maxHP=10;
 
     [Space(10)]
 
@@ -27,6 +28,7 @@ public class CharacterController : MonoBehaviour,IDamageble
     public Transform shotgunSpawnProjectile;
     public Transform rocketSpawnProjectile;
 
+    [Space(10)]
 
     public int currWeaponIndex=-1;
     protected bool isAlive=true;
@@ -43,8 +45,11 @@ public class CharacterController : MonoBehaviour,IDamageble
     // Start is called before the first frame update
     void Start()
     {
+        HPs = maxHP;
+        foreach (_Weapon weapon in weapons)
+            weapon.currMagazineIndex = 0;
+
         ChangeWeapon(currWeaponIndex);
-        shootCoroutine=StartCoroutine(Shoot());
     }
 
     private void Awake() // singleton
@@ -109,13 +114,14 @@ public class CharacterController : MonoBehaviour,IDamageble
             }
             else
             {
+                /*
                 if(hitFront.collider)
                     Debug.Log($"hit point front is:{hitFront.collider.name} ");
                 if (hitLeft.collider)
                     Debug.Log($"hit point right is:{hitLeft.collider.name} ");
                 if (hitRight.collider)
                     Debug.Log($"hit point left is:{hitRight.collider.name} ");
-
+                */
                 rigidBody2D.velocity = Vector2.zero;
             }
                 
@@ -132,6 +138,8 @@ public class CharacterController : MonoBehaviour,IDamageble
     public void GetDamage(float dmg)
     {
         HPs -= dmg;
+        InGameUIManager.instance.UpdateHP(HPs,maxHP);
+        CameraShake.instance.ExecuteShake();
         if(HPs<=0)
         {
             // game manager to do something
@@ -157,8 +165,11 @@ public class CharacterController : MonoBehaviour,IDamageble
             }
             else
             {
+                InGameUIManager.instance.UpdateMagazineInfo(0, 0);
                 movSpeed = 4;
             }
+            anim.SetInteger("weaponUsed", currWeaponIndex);
+            InGameUIManager.instance.UpdateCurrWeapon(currWeaponIndex);
             if (shootCoroutine != null)
                 StopCoroutine(shootCoroutine);
             shootCoroutine=StartCoroutine(Shoot());
@@ -178,14 +189,21 @@ public class CharacterController : MonoBehaviour,IDamageble
                 StopCoroutine(recoilEffectCoroutine);
             recoilEffectCoroutine= StartCoroutine( weapons[currWeaponIndex].RecoilEffect(this) );
             weapons[currWeaponIndex].currMagazineIndex++;
-            // shoot animation
+            InGameUIManager.instance.UpdateMagazineInfo(weapons[currWeaponIndex].currMagazineIndex, weapons[currWeaponIndex].capacityMagazine);
             // shoot audio
+
             yield return waitAttackSpeed;
             if (currWeaponIndex >=0 && weapons[currWeaponIndex].currMagazineIndex >= weapons[currWeaponIndex].capacityMagazine)
             {
                 isReloading = true;
-                weapons[currWeaponIndex].currMagazineIndex = 0;
+
+                InGameUIManager.instance.StartReloading();
+                if (weapons[currWeaponIndex].reloadClip != null)
+                    SoundEffectManager.instance.PlaySFX(weapons[currWeaponIndex].reloadClip);
                 yield return waitReloadTime;
+                InGameUIManager.instance.StopReloading();
+                weapons[currWeaponIndex].currMagazineIndex = 0;
+                InGameUIManager.instance.UpdateMagazineInfo(weapons[currWeaponIndex].currMagazineIndex, weapons[currWeaponIndex].capacityMagazine);
                 isReloading = false;
             }
            

@@ -17,12 +17,12 @@ MonoBehaviour:
   moVspeed: 3
   attackClip: {fileID: 0}
   changeWeaponClip: {fileID: 0}
-  attackSpeed: 2
+  attackSpeed: 1.2
   capacityMagazine: 30
   reloadTime: 0
   reloadClip: {fileID: 0}
   projectilePrefab: {fileID: 0}
-  currMagazineIndex: 10
+  currMagazineIndex: 28
   distanceRecoil: 0
   durationRecoil: 0
   timePreRotation: 0.1

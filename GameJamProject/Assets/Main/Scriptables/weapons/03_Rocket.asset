@@ -23,9 +23,9 @@ MonoBehaviour:
   reloadClip: {fileID: 0}
   projectilePrefab: {fileID: 483375651263044311, guid: 0002caf9a7d80904fadbffadfefe246f,
     type: 3}
-  currMagazineIndex: 1
+  currMagazineIndex: 2
   distanceRecoil: 2
-  durationRecoil: 2
+  durationRecoil: 0.1
   projSpeed: 2
   timePreShoot: 0.2
   timeForRecoilAfterShooting: 1.5

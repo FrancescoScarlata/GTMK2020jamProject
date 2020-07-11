@@ -19,10 +19,11 @@ public class Chainsaw : _Weapon
         //Debug.Log("Recoil effect for chainsaw active!");
         controller.SetIsDoindRecoil(true);
         controller.rigidBody2D.velocity = Vector2.zero;
+        controller.anim.SetTrigger("AttackTrigger");
         yield return new WaitForSeconds(timePreRotation);
         // get z axe of the player
         charRot = controller.transform.rotation.eulerAngles.z;
-        
+        CameraShake.instance.ExecuteShake();
         timeToRotate = 0;
         
         while (timeToRotate <= 1)

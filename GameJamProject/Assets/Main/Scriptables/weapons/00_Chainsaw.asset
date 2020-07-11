@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   range: 1
-  moVspeed: 3
-  attackClip: {fileID: 0}
+  moVspeed: 2.5
+  attackClip: {fileID: 8300000, guid: a059b37d46154e94594862f172113aaa, type: 3}
   changeWeaponClip: {fileID: 0}
-  attackSpeed: 1.2
+  attackSpeed: 1.5
   capacityMagazine: 30
   reloadTime: 0
   reloadClip: {fileID: 0}
   projectilePrefab: {fileID: 0}
-  currMagazineIndex: 28
+  currMagazineIndex: 12
   distanceRecoil: 0
   durationRecoil: 0
   timePreRotation: 0.1

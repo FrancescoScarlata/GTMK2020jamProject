@@ -21,6 +21,7 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         startingPosition = transform.position;
+        timeOfSpawn = Time.time;
     }
 
     void OnEnable()

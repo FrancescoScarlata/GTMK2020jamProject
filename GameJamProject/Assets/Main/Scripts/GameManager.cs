@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(this);
            
             StartCoroutine(CheckforEnemies());
         }
@@ -41,15 +40,20 @@ public class GameManager : MonoBehaviour
                 foreach (Collider2D coll in colliders)
                 {
                     if (coll.GetComponent<EnemyController>() != null)
+                    {
+                        Debug.Log($"collider name: {coll.name}");
+                        
                         if (isMusicTense)
                         {
                             soundTrackMan.Fight();
-                            isMusicTense = false;
-                            isEnemyInside = true;
-                            break;
+                            isMusicTense = false; 
                         }
+                        isEnemyInside = true;
+                        break;
+                    }
+                        
                 }
-
+                Debug.Log($"Enemy inside: {isEnemyInside}");
                 if (!isEnemyInside && !isMusicTense)
                 {
                     soundTrackMan.OutOfFight();

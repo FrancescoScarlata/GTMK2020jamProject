@@ -20,6 +20,7 @@ public class Chainsaw : _Weapon
         controller.SetIsDoindRecoil(true);
         controller.rigidBody2D.velocity = Vector2.zero;
         controller.anim.SetTrigger("AttackTrigger");
+        SoundEffectManager.instance.PlaySFX(attackClip);
         yield return new WaitForSeconds(timePreRotation);
         // get z axe of the player
         charRot = controller.transform.rotation.eulerAngles.z;

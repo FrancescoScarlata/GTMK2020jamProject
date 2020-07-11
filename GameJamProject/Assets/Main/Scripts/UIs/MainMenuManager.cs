@@ -8,10 +8,16 @@ using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
 {
     public int firstLevel=3;
+    public GameObject creditScene;
 
     public void StartGame()
     {
         SceneManager.LoadScene(firstLevel);
+    }
+
+    public void OpenCredits()
+    {
+        creditScene.SetActive(true);
     }
 
     public void QuitGame()
@@ -19,5 +25,10 @@ public class MainMenuManager : MonoBehaviour
         Application.Quit();
     }
 
+
+    public void BackToMainMenu()
+    {
+        creditScene.SetActive(false);
+    }
 
 }

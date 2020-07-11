@@ -108,7 +108,9 @@ public class CharacterController : MonoBehaviour,IDamageble
             Debug.DrawRay(transform.position, transform.up, Color.red, .5f);
             Debug.DrawRay(transform.position, -transform.right, Color.yellow, .5f);
             Debug.DrawRay(transform.position, transform.right, Color.green, .5f);
-            if (hitFront.collider==null && hitLeft.collider == null && hitRight.collider == null)
+            if ( (hitFront.collider==null ||hitFront.collider.tag=="Player") && 
+                (hitLeft.collider == null || hitLeft.collider.isTrigger) && 
+                (hitRight.collider == null || hitRight.collider.isTrigger))
             {
                 rigidBody2D.velocity = (transform.up * movSpeed);
             }

@@ -15,14 +15,14 @@ MonoBehaviour:
   damage: 8
   range: 2
   moVspeed: 1
-  attackClip: {fileID: 0}
+  attackClip: {fileID: 8300000, guid: 2df69bf5743101848b7ab0c39bddd9ac, type: 3}
   changeWeaponClip: {fileID: 0}
   attackSpeed: 2
   capacityMagazine: 5000
   reloadTime: 0
   reloadClip: {fileID: 0}
   projectilePrefab: {fileID: 0}
-  currMagazineIndex: 351
+  currMagazineIndex: 0
   distanceRecoil: 0.5
   durationRecoil: 0.1
   timePreRotation: 0.1

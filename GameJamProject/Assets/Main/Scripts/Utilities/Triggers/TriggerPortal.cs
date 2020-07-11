@@ -17,7 +17,7 @@ public abstract class TriggerPortal : MonoBehaviour {
     /// <param name="collision"></param>
     protected virtual void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.tag=="player")
+        if(collision.tag=="Player")
         {
             Vector3 playerPos = collision.transform.position;
             switch (directionOfActivation)

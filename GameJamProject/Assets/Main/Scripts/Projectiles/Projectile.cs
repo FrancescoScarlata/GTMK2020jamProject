@@ -6,11 +6,13 @@ public class Projectile : MonoBehaviour
 {
     [Header("The tag for the object pooler")]
     public string tagForSpawn;
+    public string allyTag = "Player";
 
     public float projMovSpeed = 2;
     public Rigidbody2D rgbd;
     [Header("The sound object made by the player. Only here for the player")]
     public GameObject effectWhenTouchingSomething;
+    public AudioClip hitClip;
 
     protected Vector2 direction;
     protected float damage;
@@ -32,8 +34,12 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-        if (timeOfSpawn + 10 < Time.time)
+        if (timeOfSpawn + 5 < Time.time)
             Impact();
+        else
+        {
+            rgbd.velocity = transform.up * projMovSpeed;
+        }
 
     }
 
@@ -49,8 +55,12 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter2D (Collider2D collider)
     {
         IDamageble enemy = collider.transform.GetComponent<IDamageble>();
-        if (enemy!=null && collider.transform.tag!="Player")
+        if (enemy!=null && collider.transform.tag != allyTag)
+        {
             enemy.GetDamage(damage);
+            Impact();
+        }
+            
         Debug.Log($"Collision: {collider.transform.name}");
         if(collider.transform.tag!= transform.tag)
             Impact();
@@ -63,6 +73,10 @@ public class Projectile : MonoBehaviour
     protected void Impact()
     {
         gameObject.SetActive(false);
+        if(effectWhenTouchingSomething)
+            GameObject.Instantiate(effectWhenTouchingSomething,transform.position,Quaternion.identity);
+        if (hitClip)
+            SoundEffectManager.instance.PlaySFX(hitClip);
         ObjectPooler.instance.PlaceInPool(tagForSpawn, gameObject);
 
     }

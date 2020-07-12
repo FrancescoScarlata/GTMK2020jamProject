@@ -41,7 +41,7 @@ public class NormalEnemyController : EnemyController
     {
         if (collision.transform.tag == "Player")
         {
-            Debug.Log("Collision in Enemy!");
+            //Debug.Log("Collision in Enemy!");
             StartCoroutine(WaitInTrigger());
             SoundEffectManager.instance.PlaySFX(attackClip);
             CharacterController.instance.GetDamage(myInfo.damage);

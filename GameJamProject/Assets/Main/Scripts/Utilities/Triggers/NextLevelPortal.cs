@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class NextLevelPortal : TriggerPortal
 {
-    
+    public int nextLevel;
 
 
     protected override void OnTriggerExit2D(Collider2D collision)
@@ -16,7 +16,7 @@ public class NextLevelPortal : TriggerPortal
     protected override void Activate()
     {
         Debug.Log("Activate portal");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        SceneManager.LoadScene(nextLevel);
 
     }
 }

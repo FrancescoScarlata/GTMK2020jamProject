@@ -17,12 +17,12 @@ MonoBehaviour:
   moVspeed: 2.5
   attackClip: {fileID: 8300000, guid: a059b37d46154e94594862f172113aaa, type: 3}
   changeWeaponClip: {fileID: 0}
-  attackSpeed: 1.5
+  attackSpeed: 1.2
   capacityMagazine: 30
   reloadTime: 0
   reloadClip: {fileID: 0}
   projectilePrefab: {fileID: 0}
-  currMagazineIndex: 12
+  currMagazineIndex: 3
   distanceRecoil: 0
   durationRecoil: 0
   timePreRotation: 0.1

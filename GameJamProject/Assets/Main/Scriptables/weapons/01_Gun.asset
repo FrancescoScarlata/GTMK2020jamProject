@@ -19,13 +19,13 @@ MonoBehaviour:
   changeWeaponClip: {fileID: 0}
   attackSpeed: 0.5
   capacityMagazine: 12
-  reloadTime: 2
+  reloadTime: 1.5
   reloadClip: {fileID: 8300000, guid: 59e59a4c23e932946b0ade46b8f54934, type: 3}
   projectilePrefab: {fileID: 2440432329808001276, guid: 563e6743d2f2bb94393268ac5b983a95,
     type: 3}
   currMagazineIndex: 0
   distanceRecoil: 0.2
   durationRecoil: 0.1
-  projSpeed: 5
+  projSpeed: 10
   timePreShoot: 0.1
   timeForRecoilAfterShooting: 0.1

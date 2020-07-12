@@ -23,9 +23,10 @@ public class GameManager : MonoBehaviour
             instance = this;
            
             StartCoroutine(CheckforEnemies());
+            DontDestroyOnLoad(this);
         }
         else
-            Destroy(this);
+            Destroy(gameObject);
     }
 
     IEnumerator CheckforEnemies()
@@ -41,7 +42,7 @@ public class GameManager : MonoBehaviour
                 {
                     if (coll.GetComponent<EnemyController>() != null)
                     {
-                        Debug.Log($"collider name: {coll.name}");
+                        //Debug.Log($"collider name: {coll.name}");
                         
                         if (isMusicTense)
                         {
@@ -53,7 +54,7 @@ public class GameManager : MonoBehaviour
                     }
                         
                 }
-                Debug.Log($"Enemy inside: {isEnemyInside}");
+                //Debug.Log($"Enemy inside: {isEnemyInside}");
                 if (!isEnemyInside && !isMusicTense)
                 {
                     soundTrackMan.OutOfFight();
@@ -72,13 +73,20 @@ public class GameManager : MonoBehaviour
     public void PlayerDead()
     {
         // does something to retry etc
-
+        SceneManager.LoadScene("DeathScene");
     }
 
 
-    public void LevelFinished()
+    private void OnLevelWasLoaded(int level)
     {
+        if (level == 1 || level == 2)
+            Destroy(this.gameObject);
+    }
 
+    public void GameFinished()
+    {
+        CharacterController.instance.StopMoving();
+        InGameUIManager.instance.StopTimer();
     }
 
 

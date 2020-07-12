@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class SoundtrackManager : MonoBehaviour
 {
-
     public float activeVolume=0.5f;
     public AudioSource audioSourceTense;
     public AudioSource audioSourceFight;
-
 
     private void Start()
     {

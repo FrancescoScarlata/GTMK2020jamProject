@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: normalEnemy
   m_EditorClassIdentifier: 
   HP: 3
-  movSpeed: 1.5
+  movSpeed: 2
   damage: 1
   aggroRange: 20
   myType: 0

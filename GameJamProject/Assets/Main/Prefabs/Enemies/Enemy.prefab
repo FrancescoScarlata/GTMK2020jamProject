@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2706729500150752697}
   m_Layer: 13
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,7 +85,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myInfo: {fileID: 11400000, guid: 61fa0fe6cec1a344f983a76870c6be59, type: 2}
   rgbd2D: {fileID: 2706729500150752696}
+  deathCLip: {fileID: 8300000, guid: dbac76f0c4ccc4144aa0fcf76d604acb, type: 3}
   attackRange: 1
+  attackClip: {fileID: 8300000, guid: 6985af34841ca9e46806f6b0d5acddbc, type: 3}
 --- !u!1 &2706729501094430087
 GameObject:
   m_ObjectHideFlags: 0

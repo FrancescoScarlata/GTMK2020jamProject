@@ -14,9 +14,10 @@ public class Shotgun : _Weapon
     GameObject myProjectile;
     Projectile instancedProj;
     Vector2 playerDir;
-
+    float angle;
     public override IEnumerator RecoilEffect(CharacterController controller)
     {
+       
         //Debug.Log("Recoil effect for gun active!");
         controller.SetIsDoindRecoil(true);
         controller.rigidBody2D.velocity = Vector2.zero;
@@ -26,17 +27,15 @@ public class Shotgun : _Weapon
         {
             if (i == 0)
             {
+                angle = Mathf.Atan2(controller.transform.up.y, controller.transform.up.x) * Mathf.Rad2Deg - 90;
                 myProjectile = ObjectPooler.instance.SpawnFromPool(projectilePrefab.GetComponent<Projectile>().tagForSpawn,
-                    controller.shotgunSpawnProjectile.position,Quaternion.identity);
+                    controller.shotgunSpawnProjectile.position,Quaternion.Euler(0,0,angle));
                 instancedProj = myProjectile.GetComponent<Projectile>();
                 myProjectile.SetActive(true);
                 instancedProj.SetProjInfos(controller.transform.up, projSpeed, damage);
             }
             else
             {
-                myProjectile = ObjectPooler.instance.SpawnFromPool(projectilePrefab.GetComponent<Projectile>().tagForSpawn,
-                    controller.shotgunSpawnProjectile.position, Quaternion.identity);
-                instancedProj = myProjectile.GetComponent<Projectile>();
                 playerDir = controller.transform.up;
                 if (playerDir.x * playerDir.y <= 0)
                 {
@@ -46,12 +45,18 @@ public class Shotgun : _Weapon
                 {
                     playerDir = new Vector2(playerDir.x + (spreadAngle / (360f * i)), playerDir.y - (spreadAngle / (360f * i)));
                 }
+
+                angle = Mathf.Atan2(playerDir.y,playerDir.x) * Mathf.Rad2Deg - 90;
+                myProjectile = ObjectPooler.instance.SpawnFromPool(projectilePrefab.GetComponent<Projectile>().tagForSpawn,
+                   controller.shotgunSpawnProjectile.position, Quaternion.Euler(0, 0, angle));
+                instancedProj = myProjectile.GetComponent<Projectile>();
                 myProjectile.SetActive(true);
                 instancedProj.SetProjInfos(playerDir, projSpeed, damage);
 
-                myProjectile = ObjectPooler.instance.SpawnFromPool(projectilePrefab.GetComponent<Projectile>().tagForSpawn,
-                    controller.shotgunSpawnProjectile.position, Quaternion.identity);
+
+               
                 instancedProj = myProjectile.GetComponent<Projectile>();
+                playerDir = controller.transform.up;
                 if (playerDir.x * playerDir.y <= 0)
                 {
                     playerDir = new Vector2(playerDir.x - (spreadAngle / (360f * i)), playerDir.y - (spreadAngle / (360f * i)));
@@ -60,6 +65,9 @@ public class Shotgun : _Weapon
                 {
                     playerDir = new Vector2(playerDir.x - (spreadAngle / (360f * i)), playerDir.y - (spreadAngle / (360f * i)));
                 }
+                angle = Mathf.Atan2(playerDir.y, playerDir.x) * Mathf.Rad2Deg - 90;
+                myProjectile = ObjectPooler.instance.SpawnFromPool(projectilePrefab.GetComponent<Projectile>().tagForSpawn,
+                   controller.shotgunSpawnProjectile.position, Quaternion.Euler(0, 0, angle));
                 myProjectile.SetActive(true);
                 instancedProj.SetProjInfos(playerDir, projSpeed, damage);
             }

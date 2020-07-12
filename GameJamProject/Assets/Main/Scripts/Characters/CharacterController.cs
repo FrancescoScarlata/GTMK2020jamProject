@@ -41,7 +41,7 @@ public class CharacterController : MonoBehaviour,IDamageble
     protected RaycastHit2D hitFront;
     protected RaycastHit2D hitLeft;
     protected RaycastHit2D hitRight;
-
+    protected float timeOfShoot=0;
     // Start is called before the first frame update
     void Start()
     {
@@ -145,7 +145,15 @@ public class CharacterController : MonoBehaviour,IDamageble
         if(HPs<=0)
         {
             // game manager to do something
+            GameManager.instance.PlayerDead();
         }
+    }
+
+
+    public void StopMoving()
+    {
+        rigidBody2D.velocity = Vector2.zero;
+        isAlive = false;
     }
 
     /// <summary>
@@ -164,17 +172,32 @@ public class CharacterController : MonoBehaviour,IDamageble
                 waitAttackSpeed = new WaitForSeconds(weapons[weaponType].attackSpeed);
                 waitReloadTime = new WaitForSeconds(weapons[weaponType].reloadTime);
                 movSpeed = weapons[weaponType].moVspeed;
+                if(weaponType== (int)WeaponType.berserkSword || weaponType== (int)WeaponType.chainsaw)
+                    InGameUIManager.instance.UpdateMagazineInfo(0, 0, false);
+                else
+                    InGameUIManager.instance.UpdateMagazineInfo(weapons[currWeaponIndex].currMagazineIndex, weapons[currWeaponIndex].capacityMagazine);
+                
             }
             else
             {
-                InGameUIManager.instance.UpdateMagazineInfo(0, 0);
+                InGameUIManager.instance.UpdateMagazineInfo(0, 0,false);
                 movSpeed = 4;
             }
             anim.SetInteger("weaponUsed", currWeaponIndex);
             InGameUIManager.instance.UpdateCurrWeapon(currWeaponIndex);
-            if (shootCoroutine != null)
-                StopCoroutine(shootCoroutine);
-            shootCoroutine=StartCoroutine(Shoot());
+           
+            if (currWeaponIndex>=0)   
+            {
+                if (Time.time < weapons[currWeaponIndex].attackSpeed || timeOfShoot + weapons[currWeaponIndex].attackSpeed < Time.time)
+                {
+                    if (shootCoroutine != null)
+                        StopCoroutine(shootCoroutine);
+                    shootCoroutine = StartCoroutine(Shoot());
+                }
+
+                
+            }
+                
         }
     }
 
@@ -189,14 +212,21 @@ public class CharacterController : MonoBehaviour,IDamageble
         {
             if (weapons[currWeaponIndex].currMagazineIndex < weapons[currWeaponIndex].capacityMagazine)
             {
-                if (recoilEffectCoroutine != null)
-                    StopCoroutine(recoilEffectCoroutine);
-                recoilEffectCoroutine = StartCoroutine(weapons[currWeaponIndex].RecoilEffect(this));
-                weapons[currWeaponIndex].currMagazineIndex++;
-                InGameUIManager.instance.UpdateMagazineInfo(weapons[currWeaponIndex].currMagazineIndex, weapons[currWeaponIndex].capacityMagazine);
-                // shoot audio
+                if (timeOfShoot + weapons[currWeaponIndex].attackSpeed < Time.time)
+                {
+                    timeOfShoot = Time.time;
+                    if (recoilEffectCoroutine != null)
+                        StopCoroutine(recoilEffectCoroutine);
+                    recoilEffectCoroutine = StartCoroutine(weapons[currWeaponIndex].RecoilEffect(this));
+                    weapons[currWeaponIndex].currMagazineIndex++;
 
-                yield return waitAttackSpeed;
+                    if (currWeaponIndex == (int)WeaponType.berserkSword || currWeaponIndex == (int)WeaponType.chainsaw)
+                        InGameUIManager.instance.UpdateMagazineInfo(0, 0, false);
+                    else
+                        InGameUIManager.instance.UpdateMagazineInfo(weapons[currWeaponIndex].currMagazineIndex, weapons[currWeaponIndex].capacityMagazine);
+                    yield return waitAttackSpeed;
+                }
+
             }
             if (currWeaponIndex >=0 && weapons[currWeaponIndex].currMagazineIndex >= weapons[currWeaponIndex].capacityMagazine)
             {
@@ -211,7 +241,7 @@ public class CharacterController : MonoBehaviour,IDamageble
                 InGameUIManager.instance.UpdateMagazineInfo(weapons[currWeaponIndex].currMagazineIndex, weapons[currWeaponIndex].capacityMagazine);
                 isReloading = false;
             }
-           
+            yield return null;
         }
     }
 }

@@ -13,6 +13,7 @@ public class PlayVideoScript : MonoBehaviour {
 
     public VideoPlayer videoP;
     public VideoClip cutscene;
+    public int nextLevel;
     private RawImage image;
 
     //To not let to skip when the video is not even on
@@ -115,7 +116,7 @@ public class PlayVideoScript : MonoBehaviour {
     /// </summary>
     protected virtual void ModificationsPostVideoPlay()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(nextLevel);
     }
 
 }

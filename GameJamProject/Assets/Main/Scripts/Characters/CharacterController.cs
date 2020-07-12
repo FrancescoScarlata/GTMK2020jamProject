@@ -156,6 +156,12 @@ public class CharacterController : MonoBehaviour,IDamageble
         isAlive = false;
     }
 
+    public void BlockFinalInteration()
+    {
+        isReloading = true;
+    }
+
+
     /// <summary>
     /// Changes the weapon type equipped
     /// </summary>
@@ -244,4 +250,7 @@ public class CharacterController : MonoBehaviour,IDamageble
             yield return null;
         }
     }
+
+
+
 }

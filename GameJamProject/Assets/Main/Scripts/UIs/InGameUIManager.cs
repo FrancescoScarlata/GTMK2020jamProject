@@ -123,6 +123,7 @@ public class InGameUIManager : MonoBehaviour
         while(isTimerOn)
         {
             PlayerPrefs.SetFloat("timer", timer);
+            PlayerPrefs.SetFloat("totTime", PlayerPrefs.GetFloat("totTime") + 1);
             yield return waitBeweenUpdated;
         }
     }

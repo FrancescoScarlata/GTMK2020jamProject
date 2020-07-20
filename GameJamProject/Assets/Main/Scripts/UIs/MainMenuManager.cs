@@ -13,6 +13,8 @@ public class MainMenuManager : MonoBehaviour
     public GameObject totTimePlayed;
     public TextMeshProUGUI bestTimeText;
     public TextMeshProUGUI totTimePlayedText;
+    public Slider volumeSlider;
+    public AudioSource mainMenuAudioSource;
 
     private void Start()
     {
@@ -26,6 +28,17 @@ public class MainMenuManager : MonoBehaviour
             totTimePlayed.SetActive(true);
             totTimePlayedText.text = "" + PlayerPrefs.GetFloat("totTime");
         }
+        if (PlayerPrefs.HasKey("volume"))
+        {
+            volumeSlider.value = PlayerPrefs.GetFloat("volume");
+            mainMenuAudioSource.volume = 0.5f * volumeSlider.value;
+        }
+        else
+        {
+            volumeSlider.value = 1;
+            PlayerPrefs.SetFloat("volume", 1);
+        }
+
 
     }
 
@@ -48,6 +61,14 @@ public class MainMenuManager : MonoBehaviour
     public void BackToMainMenu()
     {
         creditScene.SetActive(false);
+    }
+
+
+
+    public void OnChangedVolumeValue(float value)
+    {
+        PlayerPrefs.SetFloat("volume", value);
+        mainMenuAudioSource.volume = 0.5f * volumeSlider.value;
     }
 
 }

@@ -16,6 +16,7 @@ public class AudioSourceWithTime : MonoBehaviour
     public void Play(AudioClip clipsfx)
     {
         StartCoroutine(PlayAndWait(clipsfx));
+        
     }
 
     /// <summary>

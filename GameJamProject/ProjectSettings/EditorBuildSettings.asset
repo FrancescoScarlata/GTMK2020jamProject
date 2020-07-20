@@ -8,15 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Main/Scenes/Tests/SampleScene.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
-  - enabled: 1
+  - enabled: 0
     path: Assets/Main/Scenes/Splachscreen.unity
     guid: ba8c4662b39db8f4e9a6c594e8592998
   - enabled: 1
-    path: Assets/Main/Scenes/DeathScene.unity
-    guid: 633b73eecb3b63f42a1be22b23c4ba84
-  - enabled: 1
     path: Assets/Main/Scenes/MainMenu.unity
     guid: 1926a4f36b70655429ba513763af8483
+  - enabled: 1
+    path: Assets/Main/Scenes/DeathScene.unity
+    guid: 633b73eecb3b63f42a1be22b23c4ba84
   - enabled: 1
     path: Assets/Main/Scenes/FirstLevel.unity
     guid: abb0b1e1c1e378d4cb05836f36cc22ed

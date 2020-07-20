@@ -5,10 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
     public static GameManager instance;
     public float distanceForEnemyFightMusic=20;
-    public int currentLevel;
     public SoundtrackManager soundTrackMan;
 
     protected bool isMusicTense = true;
@@ -21,7 +19,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-           
+            SceneManager.sceneLoaded += CheckMyLevel;
             StartCoroutine(CheckforEnemies());
             DontDestroyOnLoad(this);
         }
@@ -77,10 +75,14 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void OnLevelWasLoaded(int level)
+    private void CheckMyLevel(Scene newScene, LoadSceneMode loadMode)
     {
-        if (level == 1 || level == 2)
+        if (newScene.buildIndex<2)
             Destroy(this.gameObject);
+        else
+        {
+            PlayerPrefs.SetInt("currLevel", newScene.buildIndex);
+        }
     }
 
     public void GameFinished()

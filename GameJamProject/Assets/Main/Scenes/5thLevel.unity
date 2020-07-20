@@ -64161,7 +64161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionOfActivation: 0
-  nextLevel: 8
+  nextLevel: 7
 --- !u!61 &1615940597
 BoxCollider2D:
   m_ObjectHideFlags: 0

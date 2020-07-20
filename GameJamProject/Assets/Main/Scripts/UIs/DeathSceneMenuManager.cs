@@ -5,15 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class DeathSceneMenuManager : MonoBehaviour
 {
+    public AudioSource deathAudioSource;
 
+    private void Start()
+    {
+        deathAudioSource.volume = 0.5f * PlayerPrefs.GetFloat("volume");    
+    }
     public void Retry()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(PlayerPrefs.GetInt("currLevel"));
     }
 
     public void MainMenu()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("MainMenu");
     }
 
 }

@@ -20,6 +20,7 @@ public class SoundEffectManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            currentVolume = PlayerPrefs.GetFloat("volume");
             DontDestroyOnLoad(this);
         }
         else
@@ -62,8 +63,8 @@ public class SoundEffectManager : MonoBehaviour
         AudioSourceWithTime aS = Instantiate(audioPrefab);
         aS.transform.SetParent(transform);
         mySources.Add(aS);
-        aS.Play(clip);
         aS.ChangeVolume(currentVolume);
+        aS.Play(clip);
     }
 
     /// <summary>

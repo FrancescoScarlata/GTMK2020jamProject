@@ -19,7 +19,7 @@ public class SoundtrackManager : MonoBehaviour
     {
         audioSourceFight.Stop();
         audioSourceFight.Play();
-        audioSourceFight.volume =activeVolume;
+        audioSourceFight.volume =activeVolume*PlayerPrefs.GetFloat("volume");
         audioSourceTense.volume = 0;
     }
     
@@ -30,7 +30,9 @@ public class SoundtrackManager : MonoBehaviour
 
         audioSourceTense.Stop();
         audioSourceTense.Play();
-        audioSourceTense.volume = activeVolume;
+        audioSourceTense.volume = activeVolume * PlayerPrefs.GetFloat("volume");
     }
+
+    // TO DO smooth track transition between out of fight and in fight
 
 }

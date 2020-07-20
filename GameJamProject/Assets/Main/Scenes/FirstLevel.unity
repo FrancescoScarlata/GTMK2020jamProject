@@ -30794,7 +30794,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionOfActivation: 3
-  nextLevel: 4
+  nextLevel: 3
 --- !u!61 &1615940597
 BoxCollider2D:
   m_ObjectHideFlags: 0

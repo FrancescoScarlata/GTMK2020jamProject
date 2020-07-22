@@ -85,6 +85,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void OpenCredits()
     {
+        mainMenuGO.SetActive(false);
         creditScene.SetActive(true);
     }
 
@@ -96,6 +97,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void BackToMainMenu()
     {
+        mainMenuGO.SetActive(true);
         creditScene.SetActive(false);
     }
 

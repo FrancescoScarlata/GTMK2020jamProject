@@ -35,7 +35,7 @@ public class InGameUIManager : MonoBehaviour
             {
                 timer = PlayerPrefs.GetFloat("timer");
             }
-            if (SceneManager.GetActiveScene().buildIndex == 3)
+            if (SceneManager.GetActiveScene().name =="FirstLevel" )
                 timer = 0;
             StartCoroutine(UpdateTheTimer());
         } 
@@ -131,6 +131,7 @@ public class InGameUIManager : MonoBehaviour
     IEnumerator OpenTheMainMenuButton()
     {
         yield return new WaitForSeconds(2);
+        PlayerPrefs.SetInt("currLevel", 2);
         mainMenuButton.gameObject.SetActive(true);
     }
 

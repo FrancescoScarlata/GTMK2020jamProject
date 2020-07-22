@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 471e60d1bfa444a42892c67e78a2c966, type: 3}
+  m_Name: PremiseLines
+  m_EditorClassIdentifier: 
+  lines:
+  - '4500 D.C
+
+    Houston, we lost control of a drone in an hostile land far from
+    the base.'
+  - We can only see it from the top and you can switch the weapons we equipped to
+    make it safe.
+  - 'With the weird gravity in that place, maybe not everythin is lost.
+
+    We need
+    help to bring it back to the planet base. '
+  - 'Every weapon has different recoils and different effects
+
+    There also might
+    be aliens along the way, and we don''t like each other.'
+  - Good luck

@@ -8,11 +8,6 @@ using UnityEngine;
 /// </summary>
 public abstract class AreaPortal : MonoBehaviour
 {
-
-    [Header("select which direction the portal is passed by the player to be activated")]
-    public Direction directionOfActivation;
-
-
     /// <summary>
     /// Checks when a player is inside the tigger
     /// </summary>

@@ -43,6 +43,16 @@ public class InGameUIManager : MonoBehaviour
             Destroy(gameObject);
     }
 
+    public void UnlockWeapon(int weaponIndex)
+    {
+        weaponsName[weaponIndex+1].transform.parent.gameObject.SetActive(true);
+    }
+
+    public void LockWeapon(int weaponIndex)
+    {
+        weaponsName[weaponIndex+1].transform.parent.gameObject.SetActive(false);
+    }
+
     public void UpdateCurrWeapon(int currWeapon)
     {
         for(int i=0; i<weaponsName.Length; i++)

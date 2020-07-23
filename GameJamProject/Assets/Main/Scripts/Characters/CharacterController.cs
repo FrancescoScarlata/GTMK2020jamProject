@@ -31,8 +31,10 @@ public class CharacterController : MonoBehaviour,IDamageble
     [Space(10)]
 
     public int currWeaponIndex=-1;
+    public bool[] weaponsActive= new bool [5];
     protected bool isAlive=true;
     protected bool isDoingSomeSpecialRecoil;
+    
 
     protected Coroutine shootCoroutine;
     protected Coroutine recoilEffectCoroutine;
@@ -59,6 +61,7 @@ public class CharacterController : MonoBehaviour,IDamageble
         else
         {
             instance = this;
+            InizializeWeaponInput();
         }
     }
 
@@ -73,15 +76,15 @@ public class CharacterController : MonoBehaviour,IDamageble
             {
                 ChangeWeapon(-1);
             }
-            if (Input.GetButtonDown("ChainsawWeapon"))
+            if (Input.GetButtonDown("ChainsawWeapon") && weaponsActive[0])
             {
                 ChangeWeapon((int)WeaponType.chainsaw);
             }
-            if (Input.GetButtonDown("GunWeapon"))
+            if (Input.GetButtonDown("GunWeapon") && weaponsActive[1])
             {
                 ChangeWeapon((int)WeaponType.gun);
             }
-            if (Input.GetButtonDown("ShotgunWeapon"))
+            if (Input.GetButtonDown("ShotgunWeapon") && weaponsActive[2])
             {
                 ChangeWeapon((int)WeaponType.shotgun);
             }
@@ -89,7 +92,7 @@ public class CharacterController : MonoBehaviour,IDamageble
             {
                 ChangeWeapon((int)WeaponType.rocketLauncher);
             }*/
-            if (Input.GetButtonDown("BerserkWeapon"))
+            if (Input.GetButtonDown("BerserkWeapon") && weaponsActive[4])
             {
                 ChangeWeapon((int)WeaponType.berserkSword);
             }
@@ -128,6 +131,29 @@ public class CharacterController : MonoBehaviour,IDamageble
             }
                 
 
+        }
+    }
+
+
+    public void UnlockWeapon(int weaponIndex)
+    {
+        weaponsActive[weaponIndex] = true;
+        InGameUIManager.instance.UnlockWeapon(weaponIndex);
+    }
+
+    /// <summary>
+    /// Unlocks the UI for the weapon in the index (+1 because 0 is the bare metal)
+    /// </summary>
+    protected void InizializeWeaponInput()
+    {
+        for(int i=0; i<weaponsActive.Length; i++)
+        {
+            if (weaponsActive[i])
+            {
+                InGameUIManager.instance.UnlockWeapon(i);
+            }
+            else
+                InGameUIManager.instance.LockWeapon(i);
         }
     }
 

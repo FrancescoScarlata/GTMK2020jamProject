@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     public float distanceForEnemyFightMusic=20;
     public SoundtrackManager soundTrackMan;
 
-    protected bool isMusicTense = true;
     //protected CharacterController controller;
     protected Collider2D[] colliders;
     protected WaitForSeconds waitMusic = new WaitForSeconds(2);
@@ -29,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator CheckforEnemies()
     {
+        Debug.Log("Check started!");
         bool isEnemyInside;
         while (this)
         {
@@ -40,27 +40,22 @@ public class GameManager : MonoBehaviour
                 {
                     if (coll.GetComponent<EnemyController>() != null)
                     {
-                        //Debug.Log($"collider name: {coll.name}");
-                        
-                        if (isMusicTense)
-                        {
-                            soundTrackMan.Fight();
-                            isMusicTense = false; 
-                        }
+                        //Debug.Log($"collider  name for game manager : {coll.name}");
+
+                        soundTrackMan.Fight();
                         isEnemyInside = true;
                         break;
                     }
                         
                 }
                 //Debug.Log($"Enemy inside: {isEnemyInside}");
-                if (!isEnemyInside && !isMusicTense)
+                if (!isEnemyInside)
                 {
+                    //Debug.Log("No enemy found!");
                     soundTrackMan.OutOfFight();
-                    isMusicTense = true;
                 }
 
             }
-           
             yield return waitMusic;
         }
        

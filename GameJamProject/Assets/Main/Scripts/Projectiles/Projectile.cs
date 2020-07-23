@@ -62,7 +62,7 @@ public class Projectile : MonoBehaviour
         }
             
         Debug.Log($"Collision: {collider.transform.name}");
-        if(collider.transform.tag!= transform.tag)
+        if(collider.transform.tag!= transform.tag && collider.transform.tag != "triggers")
             Impact();
     }
 

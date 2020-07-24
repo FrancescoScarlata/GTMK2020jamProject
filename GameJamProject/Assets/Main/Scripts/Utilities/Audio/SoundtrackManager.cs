@@ -13,7 +13,7 @@ public class SoundtrackManager : MonoBehaviour
     {
         isMusicTense = true;
         audioSourceFight.volume = 0;
-        audioSourceTense.volume = activeVolume;
+        audioSourceTense.volume = activeVolume* PlayerPrefs.GetFloat("volume");
     }
 
     public void Fight()

@@ -61,7 +61,10 @@ public class CharacterController : MonoBehaviour,IDamageble
         else
         {
             instance = this;
-            InizializeWeaponInput();
+            if (InGameUIManager.instance)
+                InizializeWeaponInput();
+            else
+                Invoke("InizializeWeaponInput",0.3f);
         }
     }
 
@@ -108,9 +111,9 @@ public class CharacterController : MonoBehaviour,IDamageble
             hitLeft = Physics2D.Raycast(transform.position, -transform.right, 0.55f, NotIgnoredLayers);
             hitRight = Physics2D.Raycast(transform.position, transform.right, 0.55f, NotIgnoredLayers);
 
-            Debug.DrawRay(transform.position, transform.up, Color.red, .5f);
-            Debug.DrawRay(transform.position, -transform.right, Color.yellow, .5f);
-            Debug.DrawRay(transform.position, transform.right, Color.green, .5f);
+            //Debug.DrawRay(transform.position, transform.up, Color.red, .5f);
+            //Debug.DrawRay(transform.position, -transform.right, Color.yellow, .5f);
+            //Debug.DrawRay(transform.position, transform.right, Color.green, .5f);
             if ( (hitFront.collider==null ||hitFront.collider.tag=="Player") && 
                 (hitLeft.collider == null || hitLeft.collider.isTrigger) && 
                 (hitRight.collider == null || hitRight.collider.isTrigger))
@@ -185,6 +188,11 @@ public class CharacterController : MonoBehaviour,IDamageble
     public void BlockFinalInteration()
     {
         isReloading = true;
+    }
+
+    public void UnlockInteractions()
+    {
+        isReloading = false;
     }
 
 

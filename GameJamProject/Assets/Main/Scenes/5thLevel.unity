@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -510,7 +510,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 75926471}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.078571, y: -2.0746732, z: -10.361979}
+  m_LocalPosition: {x: 1.0785708, y: -2.0746732, z: -10.361979}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -992,6 +992,46 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5650772930267640635, guid: 225d01cfe51aa8e4ba4e3cbee6af9a2c,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5650772930267640635, guid: 225d01cfe51aa8e4ba4e3cbee6af9a2c,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5650772930267640635, guid: 225d01cfe51aa8e4ba4e3cbee6af9a2c,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5650772930267640635, guid: 225d01cfe51aa8e4ba4e3cbee6af9a2c,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5827467263600323662, guid: 225d01cfe51aa8e4ba4e3cbee6af9a2c,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5827467263600323662, guid: 225d01cfe51aa8e4ba4e3cbee6af9a2c,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5827467263600323662, guid: 225d01cfe51aa8e4ba4e3cbee6af9a2c,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5827467263600323662, guid: 225d01cfe51aa8e4ba4e3cbee6af9a2c,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6566011226227199612, guid: 225d01cfe51aa8e4ba4e3cbee6af9a2c,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -1253,6 +1293,31 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6566011228121554431, guid: 225d01cfe51aa8e4ba4e3cbee6af9a2c,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983961150076893092, guid: 225d01cfe51aa8e4ba4e3cbee6af9a2c,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983961150076893092, guid: 225d01cfe51aa8e4ba4e3cbee6af9a2c,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983961150076893092, guid: 225d01cfe51aa8e4ba4e3cbee6af9a2c,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983961150076893092, guid: 225d01cfe51aa8e4ba4e3cbee6af9a2c,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983961150076893092, guid: 225d01cfe51aa8e4ba4e3cbee6af9a2c,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
@@ -1674,7 +1739,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 328840580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.078571, y: -2.0746732, z: -10.361979}
+  m_LocalPosition: {x: 1.0785708, y: -2.0746732, z: -10.361979}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1142319099}
@@ -14304,8 +14369,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -539070769
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}

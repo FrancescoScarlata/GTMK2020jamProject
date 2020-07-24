@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
     private void CheckMyLevel(Scene newScene, LoadSceneMode loadMode)
     {
         if (newScene.buildIndex<2)
-            Destroy(this.gameObject);
+            Destroy(instance.gameObject);
         else
         {
             PlayerPrefs.SetInt("currLevel", newScene.buildIndex);

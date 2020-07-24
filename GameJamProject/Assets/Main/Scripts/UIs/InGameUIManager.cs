@@ -17,10 +17,12 @@ public class InGameUIManager : MonoBehaviour
     public TextMeshProUGUI[] weaponsName;
     public TextMeshProUGUI timerText;
     public Button mainMenuButton;
+    public GameObject pauseMenuPanel;
 
     protected float timer;
     protected WaitForSeconds waitBeweenUpdated = new WaitForSeconds(1f);
     protected bool isTimerOn=true;
+    protected bool isMenupen = false;
 
     private void Awake()
     {
@@ -45,12 +47,14 @@ public class InGameUIManager : MonoBehaviour
 
     public void UnlockWeapon(int weaponIndex)
     {
-        weaponsName[weaponIndex+1].transform.parent.gameObject.SetActive(true);
+        if (weaponIndex + 1 < weaponsName.Length && weaponsName[weaponIndex + 1]!=null)
+            weaponsName[weaponIndex+1].transform.parent.parent.gameObject.SetActive(true);
     }
 
     public void LockWeapon(int weaponIndex)
     {
-        weaponsName[weaponIndex+1].transform.parent.gameObject.SetActive(false);
+        if (weaponIndex + 1<weaponsName.Length && weaponsName[weaponIndex + 1] != null)
+            weaponsName[weaponIndex+1].transform.parent.parent.gameObject.SetActive(false);
     }
 
     public void UpdateCurrWeapon(int currWeapon)
@@ -119,6 +123,26 @@ public class InGameUIManager : MonoBehaviour
 
     protected void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(isMenupen)
+            {
+                isMenupen = false;
+                pauseMenuPanel.SetActive(false);
+                Time.timeScale = 1;
+                isTimerOn = true;
+                CharacterController.instance.UnlockInteractions();
+            }
+            else
+            {
+                isMenupen = true;
+                pauseMenuPanel.SetActive(true);
+                Time.timeScale = 0f;
+                isTimerOn = false;
+                CharacterController.instance.BlockFinalInteration();
+            }
+        }
+
         if (isTimerOn)
         {
             timerText.text = "" + timer;
